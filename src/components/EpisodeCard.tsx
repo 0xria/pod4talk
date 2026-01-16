@@ -7,25 +7,31 @@ interface EpisodeCardProps {
 
 export const EpisodeCard = ({episode, onPlay}: EpisodeCardProps) => {
     return (
-        <div className="bg-white p-6 rounded-3xl shadow-md border border-rose-100 hover:shadow-lg transition-shadow">
-            <div className="relative group">
-                <img
-                src={episode.thumbnail}
-                alt={episode.title}
-                className="w-full h-48 object-cover rounded-2xl mb-4"
+        <div 
+            onClick={() => onPlay(episode)}
+            className="group bg-[#181818] hover:bg-[#282828] p-4 rounded-xl transition-all duration-300 cursor-pointer shadow-xl"
+        >
+            <div className="relative mb-4">
+                <img 
+                    src={episode.thumbnail} 
+                    className="w-full aspect-square object-cover rounded-lg shadow-2xl" 
+                    alt={episode.title} 
                 />
-                {/* Play Button Overlay */}
-                <button onClick={() => onPlay(episode)}
-                className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"
-                >
-                    <span className="bg-rose-500 text-white p-4 rounded-full shadow-xl"> Play </span>
-                </button>
+                {/* Spotify-style Play Button */}
+                <div className="absolute bottom-2 right-2 bg-rose-500 text-white p-4 rounded-full shadow-2xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z" />
+                    </svg>
+                </div>
             </div>
-            <h2 className="text-2xl font-bold text-rose-900 mb-2">{episode.title}</h2>
-            <p className="text-rose-700 mb-4">{episode.description}</p>
+            
+            {/* Light text for dark background */}
+            <h3 className="text-xl font-bold text-white truncate mb-1">{episode.title}</h3>
+            <p className="text-gray-400 text-sm line-clamp-2 mb-4">{episode.description}</p>
+            
             <div className="flex flex-wrap gap-2">
                 {episode.tags.map(tag => (
-                    <span key={tag} className="bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-sm">
+                    <span key={tag} className="bg-[#2a2a2a] text-rose-400 px-2 py-1 rounded text-xs font-medium">
                         #{tag}
                     </span>
                 ))}
